@@ -1,12 +1,50 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Welcome</title></head>
-<body style="font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#0f1724;background:#e6f7fb;margin:0;display:flex;align-items:center;justify-content:center;height:100vh">
-<main style="max-width:820px;padding:28px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.06);text-align:center">
-  <h1 style="margin:0 0 8px;color:#0b1220">Welcome to ToolMancer</h1>
-  <p style="margin:0 0 18px;color:#334155">Your browser-first toolkit — image utilities, viewers and privacy tools. Select a tool from the left to start.</p>
-  <div style="display:flex;gap:10px;justify-content:center">
-    <a href="tools/html-viewer.html" style="padding:10px 14px;background:#0b1220;color:#fff;border-radius:8px;text-decoration:none">Open HTML Viewer</a>
-    <a href="tools/image-to-pdf.html" style="padding:10px 14px;background:#00e0ff;color:#000;border-radius:8px;text-decoration:none">Try Image→PDF</a>
-  </div>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Welcome — ToolMancer</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:transparent;color:#0b1220;margin:0;font-family:Inter,system-ui,Arial}
+.header{max-width:980px;margin:28px auto;padding:26px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.06);text-align:left}
+.header h1{margin:0 0 6px;color:#0b1220}
+.header p{margin:0 0 14px;color:#334155}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
+.tool-card{background:#f8fafc;border-radius:10px;padding:12px;text-align:center;border:1px solid #e6eef6}
+.tool-card h3{margin:6px 0;color:#0b1220}
+.about, .contact{margin-top:18px;padding:14px;background:#fff;border-radius:10px;border:1px solid #e6eef6}
+.contact form{display:flex;flex-direction:column;gap:8px}
+input,textarea{padding:10px;border-radius:8px;border:1px solid #e6eef6}
+.small{font-size:13px;color:#64748b}
+.footer{margin:18px auto;max-width:980px;text-align:center;color:#94a3b8;font-size:13px}
+</style>
+</head><body>
+<main class="header">
+  <h1>ToolMancer</h1>
+  <p class="small">A free, fast and mobile-friendly collection of browser tools — viewers, converters and small privacy utilities.</p>
+
+  <section class="about">
+    <h2>About</h2>
+    <p>ToolMancer is a lightweight toolkit built for creators and developers. It's free to use and focused on privacy — everything runs in your browser. Built and maintained by an independent developer.</p>
+  </section>
+
+  <section class="tools">
+    <h2 style="margin-top:14px">Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="tools/html-viewer.html" target="_top"><h3>HTML Viewer</h3><p class="small">Paste and preview HTML instantly.</p></a>
+      <a class="tool-card" href="tools/image-to-pdf.html" target="_top"><h3>Image → PDF</h3><p class="small">Convert photos to A4 PDF.</p></a>
+      <a class="tool-card" href="tools/document-scanner.html" target="_top"><h3>Document Scanner</h3><p class="small">Scan pages using camera or upload.</p></a>
+      <a class="tool-card" href="tools/steganography.html" target="_top"><h3>Steganography</h3><p class="small">Hide short text inside images (demo).</p></a>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact</h2>
+    <form onsubmit="event.preventDefault(); alert('Thanks! This demo contact form does not send messages.');">
+      <input type="text" placeholder="Your name" required>
+      <input type="email" placeholder="Your email" required>
+      <textarea rows="3" placeholder="Message"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </section>
 </main>
+
+<div class="footer">© ToolMancer — Built with browser-first tools. No tracking.</div>
 </body></html>
