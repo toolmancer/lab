@@ -1,1 +1,1 @@
-console.log("ToolMancer site loaded 🚀");
+console.log("ToolMancer Pro loaded 🚀");
