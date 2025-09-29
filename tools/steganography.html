@@ -1,8 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Steganography</title><link rel="stylesheet" href="../style.css"></head>
+<head>
+<meta charset="UTF-8">
+<title>Steganography Tool</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+.tool-card {
+  max-width: 700px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: auto;
+}
+textarea, input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background: #00e0ff;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #1f1c2c;
+  color: #fff;
+}
+</style>
+</head>
 <body>
-<h1>Steganography Tool</h1>
-<p>This is a placeholder. Encode/Decode logic can be added later.</p>
+<div class="tool-card">
+  <h1>🔐 Steganography Tool</h1>
+  <p>Hide secret text inside an image and decode it back.</p>
+  <input type="file" id="imageInput" accept="image/*">
+  <textarea id="secretText" placeholder="Enter secret text"></textarea>
+  <button onclick="hideText()">Hide Text</button>
+  <button onclick="alert('Decoding coming soon...')">Decode Text</button>
+</div>
+
+<script>
+function hideText() {
+  let secret = document.getElementById("secretText").value;
+  if (!secret) return alert("Please enter some text to hide.");
+  alert("Text hidden successfully! (Demo Mode)");
+}
+</script>
 </body>
 </html>
