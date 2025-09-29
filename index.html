@@ -1,26 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToolMancer Hub</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ToolMancer — Pro Tools Hub</title>
 <link rel="stylesheet" href="style.css">
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div class="sidebar">
-  <h2><i class="fa-solid fa-wand-magic-sparkles"></i> ToolMancer</h2>
-  <ul>
-    <li><a href="tools/html-viewer.html" target="toolFrame"><i class="fa-solid fa-code"></i> HTML Viewer</a></li>
-    <li><a href="tools/image-to-pdf.html" target="toolFrame"><i class="fa-solid fa-file-pdf"></i> Image to PDF</a></li>
-    <li><a href="tools/steganography.html" target="toolFrame"><i class="fa-solid fa-lock"></i> Steganography</a></li>
-  </ul>
-</div>
+<header class="topbar">
+  <div class="brand"><i class="fa-solid fa-wand-magic-sparkles"></i> ToolMancer</div>
+  <button id="menuBtn" class="hamburger" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+</header>
 
-<div class="content">
-  <iframe name="toolFrame" src="welcome.html"></iframe>
-</div>
+<aside class="sidebar" id="sidebar">
+  <nav>
+    <ul>
+      <li class="nav-head">Tools</li>
+      <li><a href="welcome.html" target="toolFrame" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="tools/html-viewer.html" target="toolFrame"><i class="fa-solid fa-code"></i> HTML Viewer</a></li>
+      <li><a href="tools/image-to-pdf.html" target="toolFrame"><i class="fa-solid fa-file-pdf"></i> Image → PDF</a></li>
+      <li><a href="tools/steganography.html" target="toolFrame"><i class="fa-solid fa-lock"></i> Steganography</a></li>
+    </ul>
+  </nav>
+  <footer class="sb-foot">Made with ♥ — ToolMancer</footer>
+</aside>
+
+<main class="main">
+  <iframe name="toolFrame" id="toolFrame" src="welcome.html" sandbox="allow-same-origin allow-popups allow-forms"></iframe>
+</main>
 
 <script src="script.js"></script>
 </body>
