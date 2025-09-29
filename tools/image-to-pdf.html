@@ -3,18 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Image to PDF</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<div class="sidebar">
-<h2>ToolMancer</h2>
-<a href="../index.html">Home</a>
-</div>
-<div class="content">
-<h1>Image → PDF Converter (Demo)</h1>
-<p>This is a placeholder. You can integrate real JS libraries later.</p>
-<input type="file" accept="image/*">
-<button>Convert to PDF</button>
-</div>
+<h1>Image to PDF</h1>
+<input type="file" id="images" multiple accept="image/*"><br><br>
+<button onclick="convertPDF()">Convert to PDF</button>
+<script>
+async function convertPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+  const files = document.getElementById("images").files;
+  for(let i=0;i<files.length;i++){
+    const img = files[i];
+    const reader = new FileReader();
+    await new Promise(resolve=>{
+      reader.onload = function(e){
+        const imgData = e.target.result;
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        if(i>0) pdf.addPage();
+        pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
+        resolve();
+      };
+      reader.readAsDataURL(img);
+    });
+  }
+  pdf.save("ToolMancer.pdf");
+}
+</script>
 </body>
 </html>
