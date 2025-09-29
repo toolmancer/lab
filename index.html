@@ -1,79 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ToolMancer — All-in-One Online Toolkit</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%2300e0ff'/%3E%3Ctext x='50' y='57' font-size='45' text-anchor='middle' fill='%230b1220' font-family='Arial' font-weight='700'%3ETM%3C/text%3E%3C/svg%3E">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolMancer – All-in-One Toolkit</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">ToolMancer</div>
-  <div class="top-actions">
-    <button id="themeToggle" title="Toggle theme">🌙/☀️</button>
-  </div>
-</header>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">ToolMancer</div>
+    <nav>
+      <ul>
+        <li><a href="image-to-pdf.html">Image → PDF</a></li>
+        <li><a href="document-scanner.html">Document Scanner</a></li>
+        <li><a href="html-viewer.html">HTML Viewer</a></li>
+        <li><a href="qr-generator.html">QR Generator</a></li>
+        <li><a href="json-formatter.html">JSON Formatter</a></li>
+        <li><a href="text-diff.html">Text Diff</a></li>
+        <li><a href="url-encoder.html">URL Encoder/Decoder</a></li>
+        <li><a href="unit-converter.html">Unit Converter</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="theme-toggle" class="theme-btn">🌙</button>
+  </aside>
 
-<aside class="sidebar">
-  <nav>
-    <ul>
-      <li><a href="welcome.html">Home</a></li>
-
-      <li class="sep">Documents</li>
-      <li><a href="tools/html-viewer.html">HTML Viewer</a></li>
-      <li><a href="tools/image-to-pdf.html">Image → PDF</a></li>
-      <li><a href="tools/text-to-pdf.html">Text → PDF</a></li>
-      <li><a href="tools/document-scanner.html">Document Scanner</a></li>
-
-      <li class="sep">Images</li>
-      <li><a href="tools/image-compressor.html">Image Compressor</a></li>
-      <li><a href="tools/image-resizer.html">Image Resizer</a></li>
-      <li><a href="tools/convert-png-jpg.html">PNG ↔ JPG</a></li>
-
-      <li class="sep">Security</li>
-      <li><a href="tools/password-generator.html">Password Generator</a></li>
-      <li><a href="tools/base64.html">Base64</a></li>
-      <li><a href="tools/hash-generator.html">Hash (SHA-256)</a></li>
-
-      <li class="sep">Developer</li>
-      <li><a href="tools/json-formatter.html">JSON Formatter</a></li>
-      <li><a href="tools/text-diff.html">Text Diff</a></li>
-      <li><a href="tools/url-encoder.html">URL Encoder/Decoder</a></li>
-
-      <li class="sep">Utilities</li>
-      <li><a href="tools/qr-generator.html">QR Generator</a></li>
-      <li><a href="tools/unit-converter.html">Unit Converter</a></li>
-      <li><a href="tools/word-counter.html">Word Counter</a></li>
-
-      <li class="sep">Other</li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-
-  <div class="ad-placeholder">Ad placeholder</div>
-</aside>
-
-<main class="main">
-  <div class="content">
-    <h1>Welcome to ToolMancer</h1>
-    <p class="lead">All-in-One Online Toolkit — browser-first, privacy friendly. Choose a tool from the left menu.</p>
-
-    <section class="cards">
-      <a class="card" href="tools/image-to-pdf.html"><h3>Image → PDF</h3><p>Convert multiple images to an A4 PDF.</p></a>
-      <a class="card" href="tools/document-scanner.html"><h3>Document Scanner</h3><p>Scan pages with camera and save as PDF.</p></a>
-      <a class="card" href="tools/html-viewer.html"><h3>HTML Viewer</h3><p>Paste and preview HTML/CSS/JS.</p></a>
-      <a class="card" href="tools/qr-generator.html"><h3>QR Generator</h3><p>Create QR codes from text or URLs.</p></a>
+  <!-- Main Content -->
+  <main class="content">
+    <section class="hero">
+      <h1>Welcome to <span>ToolMancer</span></h1>
+      <p>All-in-One Online Toolkit — browser-first, privacy friendly.</p>
     </section>
 
-    <section class="container about-short">
-      <h2>About ToolMancer</h2>
-      <p class="small">ToolMancer is a free collection of browser-based utilities for creators and developers. Everything runs in your browser; nothing is uploaded to servers (except optional external libraries loaded via CDN).</p>
+    <section class="grid">
+      <a href="image-to-pdf.html" class="card">📷 Image → PDF</a>
+      <a href="document-scanner.html" class="card">📑 Document Scanner</a>
+      <a href="html-viewer.html" class="card">💻 HTML Viewer</a>
+      <a href="qr-generator.html" class="card">🔗 QR Generator</a>
+      <a href="json-formatter.html" class="card">🛠 JSON Formatter</a>
+      <a href="text-diff.html" class="card">🔍 Text Diff</a>
+      <a href="url-encoder.html" class="card">🔐 URL Encoder</a>
+      <a href="unit-converter.html" class="card">⚖️ Unit Converter</a>
+      <a href="word-counter.html" class="card">✏️ Word Counter</a>
     </section>
-  </div>
-</main>
+  </main>
 
-<script src="theme.js"></script>
+  <script src="theme.js"></script>
 </body>
 </html>
