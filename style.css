@@ -1,42 +1,38 @@
 :root{
-  --accent:#00e0ff;
   --bg:#071029;
-  --muted:#9aa4b2;
-  --white:#e6eef6;
   --panel:#0b1220;
+  --text:#e6eef6;
+  --muted:#9aa4b2;
+  --accent:#00e0ff;
+  --card:#ffffff;
+}
+:root[data-theme='light']{
+  --bg:#f6f8fb;
+  --panel:#ffffff;
+  --text:#0b2130;
+  --muted:#6b7280;
+  --accent:#0077cc;
+  --card:#ffffff;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071029,#041021);color:var(--white)}
-
-/* Topbar */
-.topbar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:fixed;left:0;right:0;top:0;z-index:40;background:transparent}
-.brand{font-weight:700;display:flex;gap:10px;align-items:center;color:var(--accent);font-size:18px}
-.hamburger{background:transparent;border:0;color:var(--white);font-size:20px;display:none}
-
-/* Sidebar */
-.sidebar{width:240px;position:fixed;top:56px;bottom:0;left:0;background:linear-gradient(180deg,#0f1724,#071029);padding:18px;border-right:1px solid rgba(255,255,255,0.03);overflow:auto}
-.sidebar nav ul{list-style:none;padding:0;margin:0}
-.sidebar .nav-head{color:var(--muted);font-size:12px;margin-bottom:12px}
-.sidebar a{display:flex;gap:12px;align-items:center;padding:10px;border-radius:8px;color:var(--white);text-decoration:none;margin:8px 0;transition:all .18s}
-.sidebar a i{width:22px;text-align:center;color:var(--accent)}
-.sidebar a:hover{transform:translateX(6px);background:rgba(255,255,255,0.02)}
-.sidebar a.active{background:var(--accent);color:#0b1220;font-weight:700}
-
-/* Main content */
-.main{margin-left:240px;padding:20px;position:relative;min-height:calc(100vh - 56px)}
-iframe{name:toolFrame;width:100%;height:calc(100vh - 56px);border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(2,6,23,0.6);background:#fff}
-
-/* responsive */
-@media(max-width:880px){
-  .sidebar{transform:translateX(-115%);transition:transform .28s;position:fixed;z-index:50}
-  .hamburger{display:block}
-  .main{margin-left:0;padding:12px}
-  .sidebar.show{transform:translateX(0)}
-  iframe{height:calc(100vh - 56px)}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,var(--bg),#021019);color:var(--text)}
+.topbar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:fixed;left:0;right:0;top:0;background:transparent;z-index:40}
+.brand{font-weight:800;color:var(--accent)}
+.sidebar{width:240px;position:fixed;top:56px;left:0;bottom:0;padding:18px;background:linear-gradient(180deg,var(--panel),#041021);overflow:auto;border-right:1px solid rgba(255,255,255,0.03)}
+.sidebar nav ul{list-style:none;padding:0;margin:0;color:var(--text)}
+.sidebar a{display:block;padding:8px 10px;color:var(--text);text-decoration:none;border-radius:6px;margin:6px 0}
+.sidebar a:hover{background:rgba(255,255,255,0.02)}
+.sidebar .sep{margin-top:12px;color:var(--muted);font-size:12px;padding:6px 0}
+.ad-placeholder{margin-top:20px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;text-align:center;color:var(--muted)}
+.main{margin-left:240px;padding:80px 28px 28px;min-height:100vh}
+.content{max-width:1100px;margin:0 auto}
+.lead{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+.card{background:var(--card);color:var(--text);border-radius:10px;padding:14px;box-shadow:0 6px 20px rgba(2,6,23,0.12);text-decoration:none}
+.container{background:var(--card);padding:18px;border-radius:10px;color:var(--text);margin-top:18px}
+@media(max-width:900px){
+  .sidebar{position:relative;width:100%;height:auto;border-right:0;padding:10px;display:flex;overflow:auto}
+  .main{margin-left:0;padding-top:120px}
 }
-
-/* small utility classes for tool pages */
-.container{max-width:980px;margin:36px auto;background:#fff;padding:22px;border-radius:12px;color:#0b1220;box-shadow:0 8px 20px rgba(2,6,23,0.06)}
-.btn{background:linear-gradient(90deg,var(--accent),#60f0d5);border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:700;color:#001}
-.small{font-size:13px;color:#64748b}
-.tool-card{background:#f8fafc;border-radius:10px;padding:14px;text-align:center;border:1px solid #e6eef6;display:block;text-decoration:none;color:inherit}
+.btn{background:linear-gradient(90deg,var(--accent),#60f0d5);border:0;padding:10px 12px;border-radius:8px;color:#001;font-weight:700;cursor:pointer}
+.small{color:var(--muted);font-size:13px}
