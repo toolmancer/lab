@@ -20,14 +20,20 @@
       <li><a href="welcome.html" target="toolFrame" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
       <li><a href="tools/html-viewer.html" target="toolFrame"><i class="fa-solid fa-code"></i> HTML Viewer</a></li>
       <li><a href="tools/image-to-pdf.html" target="toolFrame"><i class="fa-solid fa-file-pdf"></i> Image → PDF</a></li>
+      <li><a href="tools/document-scanner.html" target="toolFrame"><i class="fa-solid fa-camera"></i> Document Scanner</a></li>
       <li><a href="tools/steganography.html" target="toolFrame"><i class="fa-solid fa-lock"></i> Steganography</a></li>
+      <li><a href="tools/base64.html" target="toolFrame"><i class="fa-solid fa-code-branch"></i> Base64 Tool</a></li>
+      <li><a href="tools/text-encryptor.html" target="toolFrame"><i class="fa-solid fa-key"></i> Text Encryptor</a></li>
     </ul>
   </nav>
   <footer class="sb-foot">Made with ♥ — ToolMancer</footer>
 </aside>
 
 <main class="main">
-  <iframe name="toolFrame" id="toolFrame" src="welcome.html" sandbox="allow-same-origin allow-popups allow-forms"></iframe>
+  <iframe name="toolFrame" id="toolFrame" src="welcome.html"
+    allow="camera; microphone; geolocation; clipboard-read; clipboard-write; autoplay; encrypted-media"
+    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+    ></iframe>
 </main>
 
 <script src="script.js"></script>
