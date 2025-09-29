@@ -1,41 +1,52 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Welcome — ToolMancer</title>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolMancer — Home</title>
 <link rel="stylesheet" href="style.css">
 <style>
-body{background:transparent;color:#0b1220;margin:0;font-family:Inter,system-ui,Arial}
-.header{max-width:980px;margin:28px auto;padding:26px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.06);text-align:left}
-.header h1{margin:0 0 6px;color:#0b1220}
-.header p{margin:0 0 14px;color:#334155}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
-.tool-card{background:#f8fafc;border-radius:10px;padding:12px;text-align:center;border:1px solid #e6eef6}
+/* page-specific styles */
+.hero{max-width:980px;margin:28px auto 12px;padding:28px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.06);display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.hero .left{flex:1;min-width:240px}
+.hero h1{margin:0 0 6px;color:#0b1220}
+.hero p{margin:0;color:#334155}
+.cta{margin-top:12px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}
+.tool-card{background:#f8fafc;border-radius:10px;padding:16px;text-align:center;border:1px solid #e6eef6;display:block;text-decoration:none;color:inherit}
 .tool-card h3{margin:6px 0;color:#0b1220}
-.about, .contact{margin-top:18px;padding:14px;background:#fff;border-radius:10px;border:1px solid #e6eef6}
+.section{margin-top:18px}
 .contact form{display:flex;flex-direction:column;gap:8px}
 input,textarea{padding:10px;border-radius:8px;border:1px solid #e6eef6}
-.small{font-size:13px;color:#64748b}
 .footer{margin:18px auto;max-width:980px;text-align:center;color:#94a3b8;font-size:13px}
 </style>
-</head><body>
-<main class="header">
-  <h1>ToolMancer</h1>
-  <p class="small">A free, fast and mobile-friendly collection of browser tools — viewers, converters and small privacy utilities.</p>
-
-  <section class="about">
-    <h2>About</h2>
-    <p>ToolMancer is a lightweight toolkit built for creators and developers. It's free to use and focused on privacy — everything runs in your browser. Built and maintained by an independent developer.</p>
-  </section>
-
-  <section class="tools">
-    <h2 style="margin-top:14px">Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-card" href="tools/html-viewer.html" target="_top"><h3>HTML Viewer</h3><p class="small">Paste and preview HTML instantly.</p></a>
-      <a class="tool-card" href="tools/image-to-pdf.html" target="_top"><h3>Image → PDF</h3><p class="small">Convert photos to A4 PDF.</p></a>
-      <a class="tool-card" href="tools/document-scanner.html" target="_top"><h3>Document Scanner</h3><p class="small">Scan pages using camera or upload.</p></a>
-      <a class="tool-card" href="tools/steganography.html" target="_top"><h3>Steganography</h3><p class="small">Hide short text inside images (demo).</p></a>
+</head>
+<body style="background:transparent;color:#0b1220;font-family:Inter,system-ui,Arial;margin:0">
+<main>
+  <section class="hero">
+    <div class="left">
+      <h1>ToolMancer</h1>
+      <p class="small">Free, fast and mobile-first browser tools for creators.</p>
+      <div class="cta"><a class="btn" href="tools/html-viewer.html" target="toolFrame">Start a Tool</a></div>
+    </div>
+    <div class="right" style="min-width:240px;text-align:right">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect rx='18' width='120' height='120' fill='%2300e0ff'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%230b1220'>TM</text></svg>" alt="logo" style="border-radius:12px">
     </div>
   </section>
 
-  <section class="contact">
+  <section class="container section about">
+    <h2>About</h2>
+    <p>ToolMancer is a lightweight toolkit focused on privacy — everything runs in your browser. Built for creators who want fast, useful utilities without tracking.</p>
+  </section>
+
+  <section class="container section">
+    <h2>Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-card" href="tools/html-viewer.html" target="toolFrame"><h3>HTML Viewer</h3><p class="small">Paste and preview HTML instantly.</p></a>
+      <a class="tool-card" href="tools/image-to-pdf.html" target="toolFrame"><h3>Image → PDF</h3><p class="small">Convert photos to printable A4 PDFs.</p></a>
+      <a class="tool-card" href="tools/document-scanner.html" target="toolFrame"><h3>Document Scanner</h3><p class="small">Scan pages using camera or upload.</p></a>
+      <a class="tool-card" href="tools/steganography.html" target="toolFrame"><h3>Steganography</h3><p class="small">Hide short text inside images (demo).</p></a>
+    </div>
+  </section>
+
+  <section class="container section contact">
     <h2>Contact</h2>
     <form onsubmit="event.preventDefault(); alert('Thanks! This demo contact form does not send messages.');">
       <input type="text" placeholder="Your name" required>
@@ -44,7 +55,8 @@ input,textarea{padding:10px;border-radius:8px;border:1px solid #e6eef6}
       <button class="btn" type="submit">Send</button>
     </form>
   </section>
-</main>
 
-<div class="footer">© ToolMancer — Built with browser-first tools. No tracking.</div>
-</body></html>
+  <div class="footer">© ToolMancer — Built with browser-first tools. No tracking.</div>
+</main>
+</body>
+</html>
