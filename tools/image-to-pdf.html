@@ -1,63 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Image to PDF</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Image to PDF</title>
 <link rel="stylesheet" href="../style.css">
 <style>
-.tool-card {
-  max-width: 600px;
-  background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  margin: auto;
-  text-align: center;
-}
-input {
-  margin: 15px 0;
-}
-button {
-  padding: 10px 20px;
-  border: none;
-  background: #00e0ff;
-  color: #000;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-button:hover {
-  background: #1f1c2c;
-  color: #fff;
-}
+.container{max-width:780px;margin:36px auto;background:#fff;padding:22px;border-radius:12px;color:#0b1220;box-shadow:0 8px 30px rgba(2,6,23,0.06);text-align:center}
+.controls{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:12px}
+input[type=file]{border-radius:8px}
+.btn{background:linear-gradient(90deg,#00e0ff,#60f0d5);border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:700}
+.note{color:#334155;margin-top:8px}
 </style>
 </head>
 <body>
-<div class="tool-card">
-  <h1>🖼️ Image to PDF</h1>
-  <p>Select an image and convert it into PDF format.</p>
-  <input type="file" id="imgInput" accept="image/*">
-  <br>
-  <button onclick="convertPDF()">Convert</button>
+<div class="container">
+  <h2>Image → PDF</h2>
+  <p>Select one or more images. PNG/JPEG works best. Images will be scaled to fit A4 pages.</p>
+  <input id="files" type="file" accept="image/*" multiple>
+  <div class="controls"><button class="btn" id="go">Convert to PDF</button></div>
+  <p class="note">Tip: Use PNG for lossless results. Large images may take time to process.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-async function convertPDF() {
-  const { jsPDF } = window.jspdf;
-  let file = document.getElementById("imgInput").files[0];
-  if (!file) return alert("Please select an image first!");
-
-  let reader = new FileReader();
-  reader.onload = function(e) {
-    let imgData = e.target.result;
-    let pdf = new jsPDF();
-    pdf.addImage(imgData, "JPEG", 10, 10, 180, 160);
-    pdf.save("image.pdf");
-  };
-  reader.readAsDataURL(file);
+async function fileToDataURL(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
 }
+document.getElementById('go').addEventListener('click', async ()=>{
+  const { jsPDF } = window.jspdf;
+  const files = document.getElementById('files').files;
+  if(!files || files.length===0){ alert('Please select images first'); return; }
+  const pdf = new jsPDF({ unit:'pt', format:'a4' });
+  for(let i=0;i<files.length;i++){
+    const data = await fileToDataURL(files[i]);
+    const img = new Image();
+    img.src = data;
+    await new Promise(r=>img.onload=r);
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    let iw = img.width, ih = img.height;
+    const ratio = Math.min(pageW/iw, pageH/ih);
+    const w = iw * ratio;
+    const h = ih * ratio;
+    const x = (pageW - w)/2;
+    const y = (pageH - h)/2;
+    if(i>0) pdf.addPage();
+    const type = data.indexOf('image/png')!==-1 ? 'PNG' : 'JPEG';
+    pdf.addImage(data, type, x, y, w, h);
+  }
+  pdf.save('ToolMancer_images.pdf');
+});
 </script>
 </body>
 </html>
