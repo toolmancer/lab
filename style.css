@@ -1,44 +1,32 @@
+
 :root{
-  --accent:#00e0ff;
-  --bg1:#071029;
-  --card-bg:#0b1220;
-  --muted:#9aa4b2;
-  --text-dark:#0b1220;
-  --white:#e6eef6;
-  --glass: rgba(255,255,255,0.03);
+  --accent:#00a6ff;
+  --bg:#f4f6fb;
+  --dark:#0b1220;
+  --muted:#6b7280;
+  --card:#ffffff;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#071029,#031026);color:var(--white)}
+html,body{margin:0;height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071029,#041021);color:#fff}
 
-/* Topbar */
-.topbar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:fixed;left:0;right:0;top:0;z-index:40}
-.brand{font-weight:700;display:flex;gap:10px;align-items:center;color:var(--accent);font-size:18px}
-.hamburger{background:transparent;border:0;color:var(--white);font-size:20px;display:none}
+/* topbar */
+.topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(11,18,32,0.6);backdrop-filter:blur(6px);position:fixed;left:0;right:0;top:0;z-index:50}
+.brand{font-weight:800;display:flex;align-items:center;gap:12px;color:var(--accent);font-size:20px}
+.topnav{display:flex;gap:8px;align-items:center}
+.topnav .nav-item{color:#e6eef6;text-decoration:none;padding:8px 12px;border-radius:8px;transition:all .18s}
+.topnav .nav-item.active, .topnav .nav-item:hover{background:rgba(255,255,255,0.04);color:var(--accent)}
 
-/* Sidebar */
-.sidebar{width:260px;position:fixed;top:56px;bottom:0;left:0;background:linear-gradient(180deg,#0f1724,#071029);padding:18px;border-right:1px solid rgba(255,255,255,0.03);overflow:auto}
-.sidebar nav ul{list-style:none;padding:0;margin:0}
-.sidebar .nav-head{color:var(--muted);font-size:12px;margin-bottom:12px}
-.sidebar a{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;color:var(--white);text-decoration:none;margin:6px 0;transition:all .18s}
-.sidebar a i{width:22px;text-align:center;color:var(--accent)}
-.sidebar a:hover{transform:translateX(6px);background:rgba(255,255,255,0.02)}
-.sidebar a.active{background:var(--accent);color:#0b1220;font-weight:700}
+/* dropdown */
+.dropdown{position:relative;display:inline-block}
+.dropbtn{background:transparent;border:0;color:#e6eef6;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+.dropdown-content{display:none;position:absolute;background:linear-gradient(180deg,#0b1220,#071029);min-width:220px;box-shadow:0 8px 24px rgba(2,6,23,0.6);border-radius:8px;padding:8px;right:0}
+.dropdown-content a{display:block;padding:8px 10px;color:#e6eef6;text-decoration:none;border-radius:6px}
+.dropdown-content a:hover{background:rgba(255,255,255,0.03);color:var(--accent)}
+.dropdown:hover .dropdown-content{display:block}
 
-/* Main + iframe */
-.main{margin-left:260px;padding:24px;position:relative;min-height:calc(100vh - 56px)}
-iframe{name:toolFrame;width:100%;height:calc(100vh - 56px);border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(2,6,23,0.6);background:#fff}
+/* main iframe */
+.main{padding-top:80px;padding-left:20px;padding-right:20px}
+iframe{width:100%;height:calc(100vh - 100px);border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 40px rgba(2,6,23,0.6);background:#fff;display:block}
 
 /* responsive */
-@media(max-width:900px){
-  .sidebar{transform:translateX(-110%);transition:transform .28s;position:fixed;z-index:50}
-  .hamburger{display:block}
-  .main{margin-left:0;padding:12px}
-  .sidebar.show{transform:translateX(0)}
-  iframe{height:calc(100vh - 56px)}
-}
-
-/* helpers for inside pages (iframe content uses its own small styles but these apply for general) */
-.container{max-width:980px;margin:36px auto;background:#fff;padding:22px;border-radius:12px;color:var(--text-dark);box-shadow:0 8px 30px rgba(2,6,23,0.06)}
-.btn{background:linear-gradient(90deg,var(--accent),#60f0d5);border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:700;color:#001}
-.small{font-size:13px;color:#64748b}
-.tool-card{background:#f8fafc;border-radius:10px;padding:14px;text-align:center;border:1px solid #e6eef6;display:block}
+@media(max-width:900px){ .topnav{display:none} .topbar .hamburger{display:block} }
