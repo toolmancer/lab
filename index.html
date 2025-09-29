@@ -1,36 +1,35 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ToolMancer — Pro Tools Hub</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ToolMancer — Pro Tools Hub</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand"><i class="fa-solid fa-wand-magic-sparkles"></i> ToolMancer</div>
-    <button id="menuBtn" class="hamburger" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
-  </header>
+<header class="topbar">
+  <div class="brand"><i class="fa-solid fa-wand-magic-sparkles"></i> ToolMancer</div>
+  <button id="menuBtn" class="hamburger" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+</header>
 
-  <aside class="sidebar" id="sidebar">
-    <nav>
-      <ul>
-        <li class="nav-head">Explore</li>
-        <li><a href="welcome.html" target="toolFrame" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-        <li><a href="tools/html-viewer.html" target="toolFrame"><i class="fa-solid fa-code"></i> HTML Viewer</a></li>
-        <li><a href="tools/image-to-pdf.html" target="toolFrame"><i class="fa-solid fa-file-pdf"></i> Image → PDF</a></li>
-        <li><a href="tools/document-scanner.html" target="toolFrame"><i class="fa-solid fa-camera"></i> Document Scanner</a></li>
-        <li><a href="tools/steganography.html" target="toolFrame"><i class="fa-solid fa-lock"></i> Steganography</a></li>
-      </ul>
-    </nav>
-    <footer class="sb-foot">Made with ♥ — ToolMancer</footer>
-  </aside>
+<aside class="sidebar" id="sidebar">
+  <nav>
+    <ul>
+      <li class="nav-head">Tools</li>
+      <li><a href="welcome.html" target="toolFrame" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="tools/html-viewer.html" target="toolFrame"><i class="fa-solid fa-code"></i> HTML Viewer</a></li>
+      <li><a href="tools/image-to-pdf.html" target="toolFrame"><i class="fa-solid fa-file-pdf"></i> Image → PDF</a></li>
+      <li><a href="tools/steganography.html" target="toolFrame"><i class="fa-solid fa-lock"></i> Steganography</a></li>
+    </ul>
+  </nav>
+  <footer class="sb-foot">Made with ♥ — ToolMancer</footer>
+</aside>
 
-  <main class="main">
-    <iframe name="toolFrame" id="toolFrame" src="welcome.html" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-  </main>
+<main class="main">
+  <iframe name="toolFrame" id="toolFrame" src="welcome.html" sandbox="allow-same-origin allow-popups allow-forms"></iframe>
+</main>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
