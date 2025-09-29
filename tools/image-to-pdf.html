@@ -3,35 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <title>Image to PDF</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link rel="stylesheet" href="../style.css">
+<style>
+.tool-card {
+  max-width: 600px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: auto;
+  text-align: center;
+}
+input {
+  margin: 15px 0;
+}
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #00e0ff;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #1f1c2c;
+  color: #fff;
+}
+</style>
 </head>
 <body>
-<h1>Image to PDF</h1>
-<input type="file" id="images" multiple accept="image/*"><br><br>
-<button onclick="convertPDF()">Convert to PDF</button>
+<div class="tool-card">
+  <h1>🖼️ Image to PDF</h1>
+  <p>Select an image and convert it into PDF format.</p>
+  <input type="file" id="imgInput" accept="image/*">
+  <br>
+  <button onclick="convertPDF()">Convert</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 async function convertPDF() {
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-  const files = document.getElementById("images").files;
-  for(let i=0;i<files.length;i++){
-    const img = files[i];
-    const reader = new FileReader();
-    await new Promise(resolve=>{
-      reader.onload = function(e){
-        const imgData = e.target.result;
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        if(i>0) pdf.addPage();
-        pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
-        resolve();
-      };
-      reader.readAsDataURL(img);
-    });
-  }
-  pdf.save("ToolMancer.pdf");
+  let file = document.getElementById("imgInput").files[0];
+  if (!file) return alert("Please select an image first!");
+
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let imgData = e.target.result;
+    let pdf = new jsPDF();
+    pdf.addImage(imgData, "JPEG", 10, 10, 180, 160);
+    pdf.save("image.pdf");
+  };
+  reader.readAsDataURL(file);
 }
 </script>
 </body>
