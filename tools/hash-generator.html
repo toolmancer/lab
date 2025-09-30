@@ -6,6 +6,10 @@
     <title>Hash Generator | ToolMancer</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <!-- Include JS-SHA256 library for SHA-256 and SHA-512 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+    <!-- Include JS-MD5 library for MD5 support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
     <style>
         /* Tool-specific styles based on the common layout */
         .tool-page {
@@ -142,9 +146,9 @@
             
             <div class="tool-controls">
                 <select id="algorithmSelect" class="tool-input" style="width: auto; margin-right: 1rem;">
-                    <option value="SHA-256">SHA-256</option>
-                    <option value="MD5">MD5</option>
-                    <option value="SHA-512">SHA-512</option>
+                    <option value="sha256">SHA-256</option>
+                    <option value="md5">MD5</option>
+                    <option value="sha512">SHA-512</option>
                 </select>
                 <button class="btn" id='go'>Generate Hash</button>
             </div>
@@ -247,13 +251,18 @@
             const copyBtn = document.getElementById('copyBtn');
             const resultOutput = document.getElementById('resultOutput');
 
-            // Hash calculation function using Web Crypto API
-            async function calculateHash(text, algorithm) {
-                const enc = new TextEncoder();
-                const data = enc.encode(text);
-                const hashBuffer = await crypto.subtle.digest(algorithm, data);
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            // Hash calculation function using external libraries
+            function calculateHash(text, algorithm) {
+                switch (algorithm) {
+                    case 'sha256':
+                        return sha256.hex(text); // Using js-sha256 library
+                    case 'md5':
+                        return md5(text); // Using blueimp-md5 library
+                    case 'sha512':
+                        return sha512.hex(text); // Using js-sha256/sha512.js
+                    default:
+                        return '';
+                }
             }
 
             // Generate hash on button click
@@ -265,8 +274,8 @@
                     return;
                 }
                 const algorithm = algorithmSelect.value;
-                hashLabel.textContent = algorithm + ' Hash:';
-                hashResult.textContent = await calculateHash(text, algorithm);
+                hashLabel.textContent = algorithm.toUpperCase() + ' Hash:';
+                hashResult.textContent = calculateHash(text, algorithm);
                 resultOutput.style.display = 'block';
             });
 
@@ -283,9 +292,6 @@
                         alert('Failed to copy text.');
                     });
             });
-            
-            // Optional: Live update on input change (if desired)
-            // textInput.addEventListener('input', () => generateBtn.click()); // uncomment this line
         });
     </script>
 </body>
