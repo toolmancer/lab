@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Formatter | ToolMancer</title>
+    <title>Text Cleaner | ToolMancer</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
@@ -18,7 +18,7 @@
             width: 100%;
         }
         .tool-page .tool-card {
-            max-width: 900px; /* Wider card for code/preview */
+            max-width: 800px;
             padding: 2rem;
             width: 100%;
             box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
@@ -31,19 +31,11 @@
         .tool-header .tool-desc { font-size: 1rem; color: #475569; max-width: 650px; margin: 0 auto; line-height: 1.5; }
         [data-theme="dark"] .tool-header .tool-desc { color: #94a3b8; }
 
-        /* --- Custom UI for JSON Formatter --- */
-        .json-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .json-layout textarea {
-            min-height: 250px;
-            font-family: monospace; /* Use a monospaced font for code */
-            font-size: 0.95em;
-        }
-        .json-layout pre {
-            white-space: pre-wrap;
+        /* --- Custom UI for Text Cleaner --- */
+        .text-input-container textarea { min-height: 200px; }
+        .cleaning-options { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 0.5rem; margin-top: 1rem; }
+        .output-container { margin-top: 1.5rem; position: relative; }
+        .output-text {
             word-wrap: break-word;
             min-height: 100px;
             background: var(--bg);
@@ -51,12 +43,19 @@
             border-radius: 8px;
             padding: 1rem;
             color: var(--text);
-            font-family: monospace;
             font-size: 0.95em;
         }
-        [data-theme="dark"] .json-layout pre { background: #334155; }
-
-        .tool-controls { display: flex; justify-content: flex-start; gap: 1rem; }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -127,29 +126,34 @@
     <main class="content tool-page">
         <section class="tool-card">
             <header class="tool-header">
-                <h1>🧩 JSON Formatter</h1>
-                <p class="tool-desc">Beautify and validate JSON data instantly in your browser. All processing is done locally.</p>
+                <h1>Text Cleaner & Stripper</h1>
+                <p class="tool-desc">Quickly remove extra spaces, line breaks, or HTML tags from your text to clean up formatting.</p>
             </header>
 
-            <div class="json-layout">
-                <textarea id="jsonInput" placeholder='Paste JSON here...' class="tool-input"></textarea>
-                <div class="tool-controls">
-                    <button class="btn" id="formatBtn">Format JSON</button>
-                    <button class="btn" id="minifyBtn">Minify JSON</button>
-                    <button class="btn" id="clearBtn">Clear</button>
-                </div>
-                <h3>Output:</h3>
-                <pre id="jsonOutput"></pre>
+            <div class="text-input-container">
+                <textarea id="txtInput" placeholder="Paste text here..." class="tool-input"></textarea>
+            </div>
+
+            <div class="tool-controls">
+                <button class="btn" id="cleanSpacesBtn">Remove Extra Spaces</button>
+                <button class="btn" id="removeLinesBtn">Remove Line Breaks</button>
+                <button class="btn" id="removeHtmlBtn">Remove HTML Tags</button>
+                <button class="btn" id="clearBtn">Clear</button>
+            </div>
+
+            <div class="output-container" id="outputContainer">
+                <div id="outputText" class="output-text"></div>
+                <button class="copy-button" id="copyBtn" style="display: none;">Copy</button>
             </div>
         </section>
 
         <section class="how-to">
             <h3>How to Use</h3>
             <ol>
-                <li>Paste your JSON string into the input box.</li>
-                <li>Click "Format JSON" to prettify and validate the JSON code.</li>
-                <li>Click "Minify JSON" to compress the JSON code.</li>
-                <li>If the JSON is invalid, an error message will display.</li>
+                <li>Paste your text into the input box above.</li>
+                <li>Choose a cleaning option (e.g., remove extra spaces or HTML tags).</li>
+                <li>The cleaned text will appear in the output box.</li>
+                <li>Use the copy button to get the clean text.</li>
             </ol>
         </section>
     </main>
@@ -224,50 +228,60 @@
                 installButton.style.display = 'none';
             });
 
-            // --- JSON Formatter Tool Specific Logic ---
-            const jsonInput = document.getElementById('jsonInput');
-            const jsonOutput = document.getElementById('jsonOutput');
-            const formatBtn = document.getElementById('formatBtn');
-            const minifyBtn = document.getElementById('minifyBtn');
+            // --- Text Cleaner Tool Specific Logic ---
+            const txtInput = document.getElementById('txtInput');
+            const outputText = document.getElementById('outputText');
+            const copyBtn = document.getElementById('copyBtn');
             const clearBtn = document.getElementById('clearBtn');
+            const cleanSpacesBtn = document.getElementById('cleanSpacesBtn');
+            const removeLinesBtn = document.getElementById('removeLinesBtn');
+            const removeHtmlBtn = document.getElementById('removeHtmlBtn');
 
-            // Function to format JSON (prettify)
-            function formatJson() {
-                try {
-                    const parsedJson = JSON.parse(jsonInput.value);
-                    jsonOutput.textContent = JSON.stringify(parsedJson, null, 2);
-                } catch (e) {
-                    jsonOutput.textContent = 'Error: Invalid JSON format.';
-                    jsonOutput.style.color = 'red'; // Add visual error feedback
-                }
+            // Apply a transformation to the input text and update output
+            function applyTransformation(transformFn) {
+                const text = txtInput.value;
+                if (!text) return;
+                outputText.textContent = transformFn(text);
+                copyBtn.style.display = 'inline-block';
             }
 
-            // Function to minify JSON (remove whitespace)
-            function minifyJson() {
-                try {
-                    const parsedJson = JSON.parse(jsonInput.value);
-                    jsonOutput.textContent = JSON.stringify(parsedJson);
-                } catch (e) {
-                    jsonOutput.textContent = 'Error: Invalid JSON format.';
-                    jsonOutput.style.color = 'red';
-                }
+            // --- Transformation Functions ---
+            function removeExtraSpaces(text) {
+                return text.replace(/\s\s+/g, ' ').trim();
             }
 
-            // Function to clear input and output
-            function clearFields() {
-                jsonInput.value = '';
-                jsonOutput.textContent = '';
-                jsonOutput.style.color = 'var(--text)'; // Reset text color
+            function removeLineBreaks(text) {
+                return text.replace(/(\r\n|\n|\r)/gm, " ");
             }
 
-            // Event listeners
-            formatBtn.addEventListener('click', formatJson);
-            minifyBtn.addEventListener('click', minifyJson);
-            clearBtn.addEventListener('click', clearFields);
+            function removeHtmlTags(text) {
+                return text.replace(/<[^>]*>?/gm, '');
+            }
 
-            // Optional: Auto-format on input (or paste)
-            // jsonInput.addEventListener('input', formatJson); // Uncomment for live formatting
+            // --- Event Listeners ---
+            cleanSpacesBtn.addEventListener('click', () => applyTransformation(removeExtraSpaces));
+            removeLinesBtn.addEventListener('click', () => applyTransformation(removeLineBreaks));
+            removeHtmlBtn.addEventListener('click', () => applyTransformation(removeHtmlTags));
+
+            clearBtn.addEventListener('click', () => {
+                txtInput.value = '';
+                outputText.textContent = '';
+                copyBtn.style.display = 'none';
+            });
+
+            copyBtn.addEventListener('click', () => {
+                const textToCopy = outputText.textContent;
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => copyBtn.textContent = 'Copy', 1500);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy text.');
+                    });
+            });
         });
     </script>
 </body>
-</html>```
+</html>
